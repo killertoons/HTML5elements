@@ -1,100 +1,42 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-<style>
-    .box2 {
-      background: red;
-      padding: 10px;
-      border:3px solid black;
-      margin:20px 230px;
-      width: 230px;
-      text-shadow: 1px 1px 5px #000;
-      color: white;
-    }
-  </style>
+    <script src="./PCT16Dynamic/script.js"></script>
+    <link href="./PCT16Dynamic/style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
 
-  <header>
+<body onload="reload()">
 
-  </header>
+<h1>PC TuneUp 16 Dynamic promolink without TRM</h1>
+<div id='sourceCode'>
+    <div class='inputDescription'>CID: <input id='cid' type='text' value='783' onkeyup="reload()"></div>
+    <div class='inputDescription'>Campaign name: <input id='campaignName' type='text' value='17_Q1_AVG_DUR_inapp_campaign_OO-2723' onkeyup="reload()"></div>
+    <div class='inputDescription'>Run: <input id='run' type='text' value='1' onkeyup="reload()"></div>
+    <div class='inputDescription'>Offer: <input id='offer' type='text' value='1' onkeyup="reload()"></div>
+    <div class='inputDescription'>Suppressed countries: <input id='suppressedCountries' type='text' value='JP;KR;BR;SG;CN;CA' onkeyup="reload()"></div>
+    <div class='inputDescription'>Enabled licenses: <input id='enabledLicenses' type='text' value='1;2;4' onkeyup="reload()"></div>
+    <div class='inputDescription'>Illegal users: <input id='illegalLicenses' type='text' value='0' onkeyup="reload()"><span class="right">//if you want to target illegal set 2</span></div>
+    <div class='inputDescription'>Limit: <input id='limit' type='text' value='50' onkeyup="reload()"></div>
+    <div class='inputDescription'>AB test: <input id='abTest' type='text' value='1,1' onkeyup="reload()"></div>
+    <div class='inputDescription'>Offer names: <input id='offerNames' type='text' value='1,otap_a;2,otap_b' onkeyup="reload()"></div>
+    <div class='inputDescription'>Start date: <input id='startDate' type='text' value='19700101' onkeyup="reload()"></div>
+    <div class='inputDescription'>End date: <input id='endDate' type='text' value='20170126' onkeyup="reload()"><span class="right">// number of days( for example "7") or date in format: "20171231"</span></div>
+    <div class='inputDescription'>Tracking: <input id='tracking' type='text' value='DU%20OTAP' onkeyup="reload()"></div>
+    <div class='inputDescription'>UrlDomain: <input id='urlDomain' type='text' value='Test' onkeyup="reload()"><span class="right">// Test or Production</span></div>
+    <div class='inputDescription'>Frequency: <input id='frequency' type='text' value='1440' onkeyup="reload()"></div>
+    <div class='inputDescription'>Count: <input id='count' type='text' value='3' onkeyup="reload()"></div>
+    <div class='inputDescription'>AV Status: <input id='avStatus' type='text' value='nevermind' onkeyup="reload()"><span class="right">yes - only show if AV is installed, no - only show if AV is NOT installed, nevermind - always show</span></div>
+    <div class='inputDescription'>Day of week: <input id='dayOfWeek' type='text' value='1111111' onkeyup="reload()"></div>
 
-<a class="btn btn-primary" href="#nav" role="button">muj button vraci nav</a>
-
-<div id="page">
-  <div class="logo"></div>
-  <div id="nav">
-    <li class="logo"><a href="">Item 1</a></li>
-    <li class="logo"><a href="">Item 2</a></li>
-    <li class="logo"><a href="">Item 3</a></li>
-    <li class="logo"><a href="">Item 4</a></li>
-    <li class="logo"><a href="">Item 5</a></li>
-  </div>
 </div>
 
-  <h1 class='box2' style=''>1 This is the title of the page nebo nejaky typ textu.</h1>
-  <section>
-    <header style='border: 2px solid black;'>
-      <form action="test.html" style='padding:5px;' method="get">
-        <input type="text" pattern="[0-9]{3}" placeholder="Zadej tri cislice"/>
-        <input type="color"/>
-      </form>
+<div id="result">
 
-      <div style="height:30px;"></div>
-      <section>
-            <input type="datalist" list='browsers' placeholder='Select browser'/>
-      <datalist id='browsers'>
-        <option value="Chrome"></option>
-        <option value="Firefox"></option>
-        <option value="Opera"></option>
-        <option value="Safari"></option>
-        <option value="IE"></option>
-      </datalist>
-    </section>
+    
 
-      <ul style='float:right; padding:5px;'>
-        <li>Gallery</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
 
-      <h2><a href="/blog/opening-date-announced">Opening Date Announced</a></h2>
-  <p><em>Published on</em>: <time>September 16, 2013</time></p>
-
-      <div>
-  <ul>
-    <li><a class="active" href="/blog">Blog</a></li>
-    <li><a href="/about">About</a></li>
-    <li><a href="/contact">Contact</a></li>
-  </ul>
 </div>
-      <h1>1.1 This is the title of a sub-section.</h1>
-      <nav style='border: 2px solid black; width: 300px; align: right;'>
-        <!-- navigation -->
 
-      </nav>
-    </header>
-    <h2>1.2 This is the title of a sub-section.</h2>
-    <article>
-      <aside>
-        <p>secondary element</p>
-      </aside>
-    </article>
-    <footer>
-      <h3>footer for section</h3>
-      <div class="box" style='box-shadow: 1px 1px 2px 0px #000, 3px 3px 5px 0px blue, 3px 3px 1px 0px red; width:100%; margin-bottom: 50px; padding:0px;'>
-        <p id="nav2">nejaky text</p>
-      </div>
-
-    </footer>
-  </section>
-  b4
-
-
-
-  <footer>
-
-  </footer>
 </body>
 </html>
+

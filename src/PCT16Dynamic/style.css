@@ -1,0 +1,36 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size:14px;
+}
+
+pre {
+    font-family: "Courier New", Courier, monospace !important;
+    font-size: 14px;
+}
+
+.inputDescription {
+    font-style: bold;
+}
+
+input {
+    position: absolute;
+    left: 200px; 
+    width: 300px;
+    text-align: right;
+    
+}
+
+.text {
+    text-align: left;
+}
+
+#result {
+    border: 3px solid black;
+    margin-top: 30px;
+    padding: 5px;
+}
+
+.right {
+    position: absolute;
+    left: 510px;
+}

@@ -1,0 +1,205 @@
+// webhalla chain: cid783-dis-prg 
+// CMMS: 17_Q1_AVG_DUR_inapp_campaign_OO-2723 registratio7
+// cid: 783
+
+// run: $IDMARK_C783T
+// offer: $IDMARK_C783O
+
+private $run = 1;
+private $cid = 783;
+
+// Cleaning - if you want clean all campaign marks
+/*
+if ( exists $IDMARK_C783T ) {
+    unset $IDMARK_C783O;
+    unset $IDMARK_C783T;
+    pushbi(true,$cid.'e98',$run);
+    sethead( $cid.'e98', $run);
+    back;
+}
+*/
+
+//Rollback - if you want to rollback campaign please uncomment following code
+/*
+if ( exists $IDMARK_C783T ) {
+    if ( $IDMARK_C783T <= $run ) {
+        if ( $IDMARK_C783O == 99 ) back;
+        else if ( $IDMARK_C783O < 99 ) {
+            $IDMARK_C783O = 99;
+            sethead( 'x-avg-tnp-auto', '');
+            pushbi(true,$cid.'e97',$run);
+            sethead( $cid.'e97', $run);
+            back;
+        }
+    }
+}
+*/
+
+//Stop distribution - if you want to stop this campaign uncomment folowing back
+//back;
+
+// Conditions 
+if ( exists $AKCE_MAKEID ) {
+    sethead( $cid.'e95', 'akce MAKEID');
+    back;
+}
+
+if (! exists $Instance_LicID) {
+    sethead( $cid.'e95', 'licId does not exists');
+    back;
+}
+
+if ( exists $globalTrmTargetted ) back; // other trm campaign is distributed
+if ($IDMARK_C783T == $run) back;    // campaign was already distributed
+
+if ($avg_ver gbn< '16.22.1.58906') {    // build check
+    pushbi(true,$cid.'e95',1);
+    sethead( $cid.'e95', 1);
+    back;
+}
+
+// other promolink is distributed
+private $checkGlobalPromoLinkNonExistence = cmpPcTuGlobalPromolinkCheck('autoPromolink',$globalAutoPromoLink,$globalManualPromoLink);
+if (! $checkGlobalPromoLinkNonExistence ) {
+    pushbi(true,$cid.'e95',2);
+    sethead( $cid.'e95', 2);
+    back;
+}
+
+// license was sent in other campaign
+if ( exists $globalSentLicense or exists $globalTrmTargetted ) {
+    pushbi( true,$cid.'e95', 3 );
+    sethead( $cid.'e95', 3);
+    back;
+}
+
+// user is not from targeted country
+//if (! $ctry in 'AU;IT;NL;FR;UK;US;DE;IE;ZA;AR;MX;ES;CH;AT;CZ;BE;PL;DK;PT;SE;SK;NO;IN;RU') {
+if ($ctry in 'JP;KR;BR;SG;CN;CA') {
+    pushbi( true,$cid.'e95', 4 );
+    sethead( $cid.'e95', 4);
+    back;
+}
+
+// enabled licenses
+if (! $lic_lct in '1;2;4') {
+    pushbi( true,$cid.'e95', 5 );
+    sethead( $cid.'e95', 5);
+    back;
+}
+
+
+// illegal suppress
+if ($lic_licr != '0') {
+    pushbi( true,$cid.'e95', 6 );
+    sethead( $cid.'e95', 6);
+    back;
+}
+
+private $secondsAfterInstallation = $datetime_ts - $tmInstance_Created;
+
+if (exists $IDMARK_TESTTIME) {
+    $secondsAfterInstallation = $IDMARK_TESTTIME;
+}
+
+// free at least 1 day after installation
+if ($lic_lct == '1'){
+    if ($secondsAfterInstallation <= 86400) {
+        pushbi( true,$cid.'e95', 7 );
+        sethead( $cid.'e95', 7);
+        back;
+    }
+}
+
+// suppress trial up to 3 days after expiration
+if ($lic_lct == '2'){
+    if ($lic_vap == '30'){
+        if ($secondsAfterInstallation <= 2851200) {
+            pushbi( true,$cid.'e95', 8 );
+            sethead( $cid.'e95', 8);
+            back;
+        }
+    } else if ($lic_vap == '7') {
+        if ($secondsAfterInstallation <= 864000) {
+            pushbi( true,$cid.'e95', 8 );
+            sethead( $cid.'e95', 8);
+            back;
+        }
+    } else if ($lic_vap == '1') {
+        if ($secondsAfterInstallation <= 345600) {
+            pushbi( true,$cid.'e95', 8 );
+            sethead( $cid.'e95', 8);
+            back;
+        }
+    }
+}
+
+// suppress paid up to 14 days after purchase and less than 30 days before expiration
+if ($lic_lct == '4'){
+    if ($secondsAfterInstallation <= 1209600) {
+        pushbi( true,$cid.'e95', 9 );
+        sethead( $cid.'e95', 9);
+        back;
+    }
+
+    if ($lic_dte < 30) {
+        pushbi( true,$cid.'e95', 9 );
+        sethead( $cid.'e95', 9);
+        back;
+    }
+}
+
+// AB test + pilot limit
+private $pilotLimit = 300;
+command tcounter 'c'.$cid.'test '.$pilotLimit.' 864000';
+
+if ($tcounter_c783test_max_reached) {
+    sethead( $cid.'e95', 10);
+    back;
+}
+
+private $offer = distrib($tcounter_c783test, 1, 1); // nutne proměnnou přejmenovat ručně
+private $offerName = $offer from '1,control;2,variant';
+
+// offer variables
+private $promoStartDate = 19700101;
+private $promoEndDate = PromoTuEndDate('20160126'); // number of days( for example '7') or date in format: '20171231'
+private $promolinkTracking = 'DU%20OTAP'; // tracking defined in WAO or task with tracking
+//private $webUrl = ''.UrlDomain('Production').'/'.$cid.'/'.$offerName.'/'.$cmp_all_loc.'.html';
+private $webUrl = ''.UrlDomain('Production').'/696/otap_b/'.$cmp_all_loc.'.html';
+private $promoFreq = 1440; // promolink frequency in minutes (24 hours)
+private $promoCount = 3; // defult 3x
+
+if ($lic_lct == '4'){
+    $promoCount = 1; // for paid users 1 in total
+}
+
+private $promoAvStatus = 'nevermind'; // yes - only show if AV is installed, no - only show if AV is NOT installed, nevermind - always show
+private $promoDayOfWeek = '1111111';
+private $cidAttrTracking = concat('?iid=', $Instance_Instance);
+private $promoHash = concat('c',$cid,'o',$offer,'e',$run);
+private $zenPresent = $avg_zen_present from '0,pct;1,gse';
+private $trackingZen = '-'.$zenPresent.'';
+private $contentTracking = cmpPcTuTracking($trackingZen,$promolinkTracking,$avg_prd,$avg_prod,$lic_lct);
+private $promoUri = concat($webUrl, $cidAttrTracking, '&LICR='.$lic_licr.'&LT='.$lic_lct.'&GEOIP='.$ctry.'&ZEN='.$avg_zen_present, $contentTracking);
+
+// autopromolink
+cmpPcTuSendDynamicPromolink ($promoHash, $promoEndDate, $promoUri, $promoStartDate, $promoFreq, $promoCount, $promoAvStatus, $promoDayOfWeek);
+
+// distribution
+if ($IDMARK_C783T != $run or $IDMARK_C783O != $offer) {
+    if (! exists $IDMARK_C783T) {
+        private $distribGroup = cmpPcTuDistribGroup($avg_prd,$avg_prod,$avg_avg_ver,$lic_licr,$lic_lct,$AVinZen,$avg_zen_present);
+        pushbi(true,'783e1',$distribGroup);
+        sethead( $cid.'e1', $distribGroup);
+        pushbi(true,'783e2',25);
+        sethead( $cid.'e2', 25);
+    }
+    pushbi(true,$cid.'e3',$offer);
+    sethead( $cid.'e3', $offer);
+    pushbi(true,$cid.'e4',$run);
+    sethead( $cid.'e4', $run);
+}
+
+$IDMARK_C783T = $run;
+$IDMARK_C783O = $offer; 
