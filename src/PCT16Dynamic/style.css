@@ -12,12 +12,22 @@ pre {
     font-style: bold;
 }
 
-input {
+.inputValue {
     position: absolute;
     left: 200px; 
     width: 300px;
     text-align: right;
     
+}
+
+.export {
+    width: 80px;
+    text-align: center;
+}
+
+.import {
+    width: 100px;
+    text-align: center;
 }
 
 .text {
@@ -26,7 +36,7 @@ input {
 
 #result {
     border: 3px solid black;
-    margin-top: 30px;
+    margin-top: 50px;
     padding: 5px;
 }
 
@@ -34,3 +44,15 @@ input {
     position: absolute;
     left: 510px;
 }
+
+.exportSet {
+    width: 300px;
+    border: 0px solid #ffffff
+}
+
+.importSet {
+    width: 300px;
+    border: 0px solid #ffffff
+}
+
+

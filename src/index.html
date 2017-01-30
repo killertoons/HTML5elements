@@ -9,33 +9,50 @@
 
 <h1>PC TuneUp 16 Dynamic promolink without TRM</h1>
 <div id='sourceCode'>
-    <div class='inputDescription'>CID: <input id='cid' type='text' value='783' onkeyup="reload()"></div>
-    <div class='inputDescription'>Campaign name: <input id='campaignName' type='text' value='17_Q1_AVG_DUR_inapp_campaign_OO-2723' onkeyup="reload()"></div>
-    <div class='inputDescription'>Run: <input id='run' type='text' value='1' onkeyup="reload()"></div>
-    <div class='inputDescription'>Offer: <input id='offer' type='text' value='1' onkeyup="reload()"></div>
-    <div class='inputDescription'>Suppressed countries: <input id='suppressedCountries' type='text' value='JP;KR;BR;SG;CN;CA' onkeyup="reload()"></div>
-    <div class='inputDescription'>Enabled licenses: <input id='enabledLicenses' type='text' value='1;2;4' onkeyup="reload()"></div>
-    <div class='inputDescription'>Illegal users: <input id='illegalLicenses' type='text' value='0' onkeyup="reload()"><span class="right">//if you want to target illegal set 2</span></div>
-    <div class='inputDescription'>Limit: <input id='limit' type='text' value='50' onkeyup="reload()"></div>
-    <div class='inputDescription'>AB test: <input id='abTest' type='text' value='1,1' onkeyup="reload()"></div>
-    <div class='inputDescription'>Offer names: <input id='offerNames' type='text' value='1,otap_a;2,otap_b' onkeyup="reload()"></div>
-    <div class='inputDescription'>Start date: <input id='startDate' type='text' value='19700101' onkeyup="reload()"></div>
-    <div class='inputDescription'>End date: <input id='endDate' type='text' value='20170126' onkeyup="reload()"><span class="right">// number of days( for example "7") or date in format: "20171231"</span></div>
-    <div class='inputDescription'>Tracking: <input id='tracking' type='text' value='DU%20OTAP' onkeyup="reload()"></div>
-    <div class='inputDescription'>UrlDomain: <input id='urlDomain' type='text' value='Test' onkeyup="reload()"><span class="right">// Test or Production</span></div>
-    <div class='inputDescription'>Frequency: <input id='frequency' type='text' value='1440' onkeyup="reload()"></div>
-    <div class='inputDescription'>Count: <input id='count' type='text' value='3' onkeyup="reload()"></div>
-    <div class='inputDescription'>AV Status: <input id='avStatus' type='text' value='nevermind' onkeyup="reload()"><span class="right">yes - only show if AV is installed, no - only show if AV is NOT installed, nevermind - always show</span></div>
-    <div class='inputDescription'>Day of week: <input id='dayOfWeek' type='text' value='1111111' onkeyup="reload()"></div>
+    <div class='inputDescription'>CID<input id='cid' class='inputValue' type='text' value='783' onkeyup="reload()"></div>
+    <div class='inputDescription'>Campaign name<input id='campaignName' class='inputValue' type='text' value='17_Q1_AVG_DUR_inapp_campaign_OO-2723' onkeyup="reload()"></div>
+    <div class='inputDescription'>Run<input id='run' class='inputValue' type='text' value='1' onkeyup="reload()"></div>
+    <div class='inputDescription'>Offer<input id='offer' class='inputValue' type='text' value='1' onkeyup="reload()"></div>
+    <div class='inputDescription'>Suppressed countries:<input id='suppressedCountries' class='inputValue' type='text' value='JP;KR;BR;SG;CN;CA' onkeyup="reload()"></div>
+    <div class='inputDescription'>Enabled licenses:<input id='enabledLicenses' class='inputValue' type='text' value='1;2;4' onkeyup="reload()"></div><span class="right">// if you want target illegal users set 2</span>
+    <div class='inputDescription'>Illegal users:<input id='illegalLicenses' class='inputValue' type='text' value='0' onkeyup="reload()"></div>
+    <div class='inputDescription'>Limit:<input id='limit' class='inputValue' type='text' value='50' onkeyup="reload()"></div>
+    <div class='inputDescription'>AB test:<input id='abTest' class='inputValue' type='text' value='1,1' onkeyup="reload()"></div>
+    <div class='inputDescription'>Offer names:<input id='offerNames' class='inputValue' type='text' value='1,otap_a;2,otap_b' onkeyup="reload()"></div>
+    <div class='inputDescription'>Start date:<input id='startDate' class='inputValue' type='text' value='19700101' onkeyup="reload()"></div><span class="right">// number of days( for example "7") or date in format: "20171231"</span>
+    <div class='inputDescription'>End date:<input id='endDate' class='inputValue' type='text' value='20170126' onkeyup="reload()"></div>
+    <div class='inputDescription'>Tracking:<input id='tracking' class='inputValue' type='text' value='DU%20OTAP' onkeyup="reload()"></div><span class="right">// Test or Production</span>
+    <div class='inputDescription'>UrlDomain:<input id='urlDomain' class='inputValue' type='text' value='Test' onkeyup="reload()"></div>
+    <div class='inputDescription'>Frequency:<input id='frequency' class='inputValue' type='text' value='1440' onkeyup="reload()"></div>
+    <div class='inputDescription'>Count:<input id='count' class='inputValue' type='text' value='3' onkeyup="reload()"></div><span class="right">// yes - only show if AV is installed, no - only show if AV is NOT installed, nevermind - always show</span>
+    <div class='inputDescription'>AV Status:<input id='avStatus' class='inputValue' type='text' value='nevermind' onkeyup="reload()"></div>
+    <div class='inputDescription'>Day of week:<input id='dayOfWeek' class='inputValue' type='text' value='1111111' onkeyup="reload()"></div>
 
 </div>
 
-<div id="result">
+<div>
 
-    
+    <form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
 
+    <div style='width: 550px; border:1px solid #ffffff; margin-top: 20px;'>
+        <div  style='text-align: left; float: left;'>
+            <h2>Export</h2>
+            <input class='export' type="button" value='Export' onclick="exportData()"/>
+            <div id="container"></div>
+        </div>
 
+        <div style='text-align: right;'>
+            <h2>Import</h2>
+            <input type='file' id='fileinput'>
+            <input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
+        </div>
+    </div>
+</form>
 </div>
+
+<div id="container"></div>
+
+<div id="result"></div>
 
 </body>
 </html>

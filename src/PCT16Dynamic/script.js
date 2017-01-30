@@ -112,7 +112,7 @@ function reload(){
     result += '}</br></br>';
 
     result += '// enabled licenses</br>';
-    result += 'if (! $lic_lct in "' + enabledLicenses + '") {</br>';
+    result += 'if (! ($lic_lct in "' + enabledLicenses + '")) {</br>';
     result += '     pushbi( true,$cid."e95", 5 );</br>';
     result += '     sethead( $cid."e95", 5);</br>';
     result += '     back;</br>';
@@ -234,3 +234,88 @@ function reload(){
     result += '</pre>';
     document.getElementById('result').innerHTML = result;
 }
+
+
+
+function loadFile() {
+    var input, file, fr;
+
+    if (typeof window.FileReader !== 'function') {
+      alert("The file API isn't supported on this browser yet.");
+      return;
+    }
+
+    input = document.getElementById('fileinput');
+    if (!input) {
+      alert("Um, couldn't find the fileinput element.");
+    }
+    else if (!input.files) {
+      alert("This browser doesn't seem to support the `files` property of file inputs.");
+    }
+    else if (!input.files[0]) {
+      alert("Please select a file before clicking 'Load'");
+    }
+    else {
+      file = input.files[0];
+      fr = new FileReader();
+      fr.onload = receivedText;
+      fr.readAsText(file);
+    }
+
+    function receivedText(e) {
+      lines = e.target.result;
+      var importedDataObj = JSON.parse(lines); 
+      console.log(importedDataObj.sourceData.length);
+
+      for (var i = 0; i<importedDataObj.sourceData.length; i++) {
+          console.log(importedDataObj.sourceData[i].description);
+          document.getElementById(importedDataObj.sourceData[i].description).value = importedDataObj.sourceData[i].value;
+
+      }
+
+      reload();
+
+
+    }
+  }
+
+
+
+function exportData(){
+    var inputDescriptions = document.getElementsByClassName('inputDescription');
+    var inputValues = document.getElementsByClassName('inputValue');
+    var result = '{"sourceData":[';
+    for (var i = 0; i<inputDescriptions.length; i++){
+         //console.log(inputDescriptions[i].textContent + ' ' + inputValues[i].value);
+
+         //result += '{"description":"' + inputDescriptions[i].textContent + '","value":"' + inputValues[i].value  + '"}';
+
+         result += '{"description":"' + inputValues[i].id + '","value":"' + inputValues[i].value  + '"}';
+
+         if (i != (inputDescriptions.length-1)){
+         result += ',';
+         }
+     }
+
+     result += ']}';
+
+     console.log(result);
+
+     var obj = JSON.parse(result);
+
+        var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+
+        var a = document.createElement('a');
+        a.href = 'data:' + data;
+        a.download = 'data.json';
+        a.innerHTML = 'download JSON';
+
+        var container = document.getElementById('container');
+        container.appendChild(a);
+
+        //var obj = JSON.parse(result);
+        //console.log(obj.sourceData[1].value);
+        //alert(exportResult[1].textContent);
+    
+}
+

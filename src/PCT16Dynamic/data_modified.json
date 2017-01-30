@@ -1,0 +1,76 @@
+{
+    "sourceData": [
+        {
+            "description": "cid",
+            "value": "784"
+        },
+        {
+            "description": "campaignName",
+            "value": "17_Q1_AVG_DUR_inapp_campaign_OO-2723-2"
+        },
+        {
+            "description": "run",
+            "value": "1-2"
+        },
+        {
+            "description": "offer",
+            "value": "1-2"
+        },
+        {
+            "description": "suppressedCountries",
+            "value": "JP;KR;BR;SG;CN;CA-2"
+        },
+        {
+            "description": "enabledLicenses",
+            "value": "1;2;4-2"
+        },
+        {
+            "description": "illegalLicenses",
+            "value": "0-2"
+        },
+        {
+            "description": "limit",
+            "value": "50-2"
+        },
+        {
+            "description": "abTest",
+            "value": "1,1-2"
+        },
+        {
+            "description": "offerNames",
+            "value": "1,otap_a;2,otap_b-2"
+        },
+        {
+            "description": "startDate",
+            "value": "19700101-2"
+        },
+        {
+            "description": "endDate",
+            "value": "20170126-2"
+        },
+        {
+            "description": "tracking",
+            "value": "DU%20OTAP-2"
+        },
+        {
+            "description": "urlDomain",
+            "value": "Test-2"
+        },
+        {
+            "description": "frequency",
+            "value": "1440-2"
+        },
+        {
+            "description": "count",
+            "value": "3-2"
+        },
+        {
+            "description": "avStatus",
+            "value": "nevermind-2"
+        },
+        {
+            "description": "dayOfWeek",
+            "value": "1111111-2"
+        }
+    ]
+}
