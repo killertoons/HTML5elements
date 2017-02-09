@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="./PCT16Dynamic/script.js"></script>
-    <link href="./PCT16Dynamic/style.css" rel="stylesheet" type="text/css">
+    <script src="./script.js"></script>
+    <link href="./style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body onload="reload()">
@@ -14,6 +14,7 @@
     <div class='inputDescription'>Run<input id='run' class='inputValue' type='text' value='1' onkeyup="reload()"></div>
     <div class='inputDescription'>Offer<input id='offer' class='inputValue' type='text' value='1' onkeyup="reload()"></div>
     <div class='inputDescription'>Suppressed countries:<input id='suppressedCountries' class='inputValue' type='text' value='JP;KR;BR;SG;CN;CA' onkeyup="reload()"></div>
+    <div class='inputDescription'>Suppressed languages:<input id='suppressedLanguages' class='inputValue' type='text' value='1044;1046;1034' onkeyup="reload()"></div>
     <div class='inputDescription'>Enabled licenses:<input id='enabledLicenses' class='inputValue' type='text' value='1;2;4' onkeyup="reload()"></div><span class="right">// if you want target illegal users set 2</span>
     <div class='inputDescription'>Illegal users:<input id='illegalLicenses' class='inputValue' type='text' value='0' onkeyup="reload()"></div>
     <div class='inputDescription'>Limit:<input id='limit' class='inputValue' type='text' value='50' onkeyup="reload()"></div>
@@ -27,22 +28,23 @@
     <div class='inputDescription'>Count:<input id='count' class='inputValue' type='text' value='3' onkeyup="reload()"></div><span class="right">// yes - only show if AV is installed, no - only show if AV is NOT installed, nevermind - always show</span>
     <div class='inputDescription'>AV Status:<input id='avStatus' class='inputValue' type='text' value='nevermind' onkeyup="reload()"></div>
     <div class='inputDescription'>Day of week:<input id='dayOfWeek' class='inputValue' type='text' value='1111111' onkeyup="reload()"></div>
-
+    
 </div>
 
 <div>
 
     <form id="jsonFile" name="jsonFile" enctype="multipart/form-data" method="post">
 
-    <div style='width: 550px; border:1px solid #ffffff; margin-top: 20px;'>
+    <div style='width: 750px; border:1px solid #ffffff; margin-top: 20px;'>
         <div  style='text-align: left; float: left;'>
             <h2>Export</h2>
-            <input class='export' type="button" value='Export' onclick="exportData()"/>
+            <input class='export' type="button" value='Export metadata' onclick="exportData()"/>
+            <input class='export' type="button" value='Export CODE' onclick="exportCode()"/>
             <div id="container"></div>
         </div>
 
         <div style='text-align: right;'>
-            <h2>Import</h2>
+            <h2 style='text-align: left; padding-left: 435px;'>Import</h2>
             <input type='file' id='fileinput'>
             <input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
         </div>
@@ -52,7 +54,7 @@
 
 <div id="container"></div>
 
-<div id="result"></div>
+<div id="result">neco</div>
 
 </body>
 </html>
